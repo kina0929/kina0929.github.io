@@ -13,7 +13,7 @@
 
 
 
-<title>测试文件 | Kina&#39;blog</title>
+<title>印象之旅（第三十一篇：花客） | Kina&#39;blog</title>
 
 
 
@@ -127,11 +127,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">测试文件</h1>
+            <h1 class="post-title">印象之旅（第三十一篇：花客）</h1>
             
                 <div class="post-meta">
                     
@@ -140,16 +205,40 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">March 11, 2025&nbsp;&nbsp;0:00:03</a>
+                        Date: <a href="#">March 14, 2025&nbsp;&nbsp;21:29:43</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p>11111</p>
+            <h2 id="花客"><a href="#花客" class="headerlink" title="花客"></a>花客</h2><p>你用离别来摆脱思念</p>
+<p>那是一间空了很久很久的屋子</p>
+<p>我时常回到这里</p>
+<p>在那屋外种一些花</p>
+<p>曾经我踏上这窗台</p>
+<p>俯身观望那一片花海</p>
+<p>后来我停留在花地</p>
+<p>凝望那陈旧的身影</p>
+<p>映出风的香甜与苦咸</p>
+<p>或许有一天你会回到这里</p>
+<p>留经这片花田</p>
+<p>插满了人们的思念</p>
+<p>在昔日的目光中泛滥</p>
+<p>渐渐地</p>
+<p>被野花埋没</p>
+<hr>
+<hr>
+<p><strong>写于</strong>：<strong>2025.03.14</strong></p>
 
         </div>
 
@@ -177,6 +266,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/%E5%9B%9E%E5%BF%86%E5%BD%95/"># 回忆录</a>
+                    
+                        
                 </span>
             </div>
             <div>
